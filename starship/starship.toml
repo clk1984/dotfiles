@@ -1,0 +1,84 @@
+format = """\
+  $kubernetes\
+  $directory\
+  $git_branch\
+  $git_commit\
+  $git_status\
+  $git_state\
+  $custom\
+  $jobs\
+  $cmd_duration\
+  $line_break\
+  $battery\
+  $time\
+  $character\
+"""
+
+[battery]
+  charging_symbol = "⚡️"
+  discharging_symbol = "💀"
+  format = "[$symbol $percentage]($style) "
+[[battery.display]]
+  threshold = 20
+  style = "bold #f1fa8c"
+[[battery.display]]
+  threshold = 10
+  style = "bold red"
+
+[character]
+  success_symbol = "[❯](bold #50fa7b)"
+  error_symbol = "[✗](bold #ff5555)"
+
+[cmd_duration]
+  min_time = 1000
+  format = "» took [$duration]($style) "
+  style = "bold"
+
+[directory]
+  truncation_length = 8
+  truncation_symbol = "…/"
+  style = "bold"
+  format = "» [$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+  format = "» [$symbol$branch]($style) "
+  style = "bold"
+
+[git_status]
+  ahead = "⇡${count}"
+  behind = "⇣${count}"
+  conflicted = "✗"
+  diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+  format = '([\[$all_status$ahead_behind\]]($style)) '
+
+[git_commit]
+  commit_hash_length = 8
+  tag_disabled = false
+  only_detached = false
+  format = "on [$hash]($style) "
+  style = "bold"
+
+[git_state]
+  format = '» [$state( $progress_current/$progress_total)]($style) '
+  style = "bold"
+
+[kubernetes]
+  format = '[$context]($style) '
+  disabled = false
+  style = "bold"
+  contexts = [
+    { context_pattern = "sast-pilcrow-dev_default", context_alias = "dev" },
+    { context_pattern = "sast-pilcrow-demo_default", context_alias = "demo" },
+    { context_pattern = "sast-pilcrow-live_default", context_alias = "live" },
+    { context_pattern = "past-pilcrow-live_OpsReader", context_alias = "live-read" }
+  ]
+
+[python]
+  format = '» [(\($virtualenv\))]($style)'
+  style = "bold"
+
+[time]
+  disabled = false
+  format = "[$time]($style) "
+  style = "bold"
+

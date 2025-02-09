@@ -1,4 +1,4 @@
-.PHONY:  ghostty git mise nvim
+.PHONY:  ghostty git mise nvim starship
 default: .PHONY
 
 #bootstrap:
@@ -25,3 +25,7 @@ mise:
 nvim: mise
 	@chmod +x nvim/install.sh
 	@./nvim/install.sh
+
+starship: 
+	@chmod +x starship/install.sh
+	@./starship/install.sh
