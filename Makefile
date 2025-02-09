@@ -22,3 +22,6 @@ mise:
 	@chmod +x mise/install.sh
 	@./mise/install.sh
 
+nvim: mise
+	@chmod +x nvim/install.sh
+	@./nvim/install.sh
