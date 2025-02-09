@@ -1,0 +1,25 @@
+#https://mise.jdx.dev/registry.html
+[tools]
+java = ["21"]
+node = ["22"]
+python = ["3"]
+rust = ["nightly"]
+yarn = ["4"]
+aws-vault = "latest"
+awscli = "latest"
+bat = "latest"
+delta = "latest"
+fd = "latest"
+fzf = "latest"
+gcloud = "latest"
+github-cli = "latest"
+go = "latest"
+jq = "latest"
+kubectl = "latest"
+neovim = "latest"
+pnpm = "9.7"
+starship = "latest"
+terraform = "1.9"
+terragrunt = "0.67"
+tflint = "0.53.0"
+k9s = "latest"
