@@ -76,9 +76,8 @@
   autoStash = true
 
 [user]
-  # default user config, unless overwritten via [include]
-  name = Patrick Kissling
-  email = clip_lye.0j@icloud.com
+	name = clk194
+	email = 25397321+clk1984@users.noreply.github.com
 
 [include]
   # user details
@@ -86,7 +85,3 @@
 
 [init]
 	defaultBranch = main
-
-[user]
-  email = 25397321+clk1984@users.noreply.github.com
-  name  = clk194
