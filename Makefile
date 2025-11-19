@@ -1,48 +1,60 @@
-.PHONY: terminator git mise nvim starship vscode dependencies install
+.PHONY: terminator git mise nvim starship vscode dependencies install 
 default: .PHONY
 
 terminator:
-	@echo "Instalando configuración de Terminator..."
+	@echo "🚀 \\e[1;34mInstalando configuración de Terminator...\\e[0m"
 	@mkdir -p ~/.config/terminator
 	@cp terminator/config ~/.config/terminator/config
-	@echo "Configuración de Terminator instalada correctamente."
+	@echo "✅ \\e[1;32mConfiguración de Terminator instalada correctamente.\\e[0m"
 
 git:
-	@echo "Instalando configuración de Git..."
+	@echo "🚀 \\e[1;34mInstalando configuración de Git...\\e[0m"
 	@chmod +x git/install.sh
 	@./git/install.sh
-	@echo "Configuración de Git instalada correctamente."
+	@echo "✅ \\e[1;32mConfiguración de Git instalada correctamente.\\e[0m"
 
 mise: 
-	@echo "Instalando configuración de Mise..."
+	@echo "🚀 \\e[1;34mInstalando configuración de Mise...\\e[0m"
 	@chmod +x mise/install.sh
 	@./mise/install.sh
-	@echo "Configuración de Mise instalada correctamente."
+	@echo "✅ \\e[1;32mConfiguración de Mise instalada correctamente.\\e[0m"
 
 nvim: mise
-	@echo "Instalando configuración de Neovim..."
+	@echo "🚀 \\e[1;34mInstalando configuración de Neovim...\\e[0m"
 	@chmod +x nvim/install.sh
 	@./nvim/install.sh
-	@echo "Configuración de Neovim instalada correctamente."
-
+	@echo "✅ \\e[1;32mConfiguración de Neovim instalada correctamente.\\e[0m"
+.PHONY: starship
 starship: 
-	@echo "Instalando configuración de Starship..."
+	@echo "🚀 \\e[1;34mInstalando configuración de Starship...\\e[0m"
 	@chmod +x starship/install.sh
 	@./starship/install.sh
-	@echo "Configuración de Starship instalada correctamente."
+	@echo "✅ \\e[1;32mConfiguración de Starship instalada correctamente.\\e[0m"
 
 vscode: 
-	@echo "Instalando configuración de VSCode..."
+	@echo "🚀 \\e[1;34mInstalando configuración de VSCode...\\e[0m"
 	@chmod +x vscode/install.sh
 	@./vscode/install.sh
-	@echo "Configuración de VSCode instalada correctamente."
+	@echo "✅ \\e[1;32mConfiguración de VSCode instalada correctamente.\\e[0m"
 
 .PHONY: dependencies
 dependencies:
-	@echo "Instalando dependencias necesarias..."
+	@echo "🚀 \\e[1;34mInstalando dependencias necesarias...\\e[0m"
 	@bash ./dependencies.sh
-	@echo "Dependencias instaladas correctamente."
+	@echo "✅ \\e[1;32mDependencias instaladas correctamente.\\e[0m"
 
 .PHONY: install
 install: dependencies terminator git mise nvim starship vscode
-	@echo "Instalación completa de todas las configuraciones."
+	@echo "🎉 \\e[1;32mInstalación completa de todas las configuraciones.\\e[0m"
+
+.PHONY: test
+
+.PHONY: test test-%
+
+test:
+	docker run --rm -v $(PWD):/dotfiles -w /dotfiles ubuntu:latest bash -c \
+		"export CI=true && apt update && apt install -y build-essential && make install"
+
+test-%:
+	docker run --rm -v $(PWD):/dotfiles -w /dotfiles ubuntu:latest bash -c \
+		"export CI=true && apt update && apt install -y build-essential && make $*"
