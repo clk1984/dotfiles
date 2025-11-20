@@ -202,11 +202,27 @@ Todos los estilos y símbolos pueden personalizarse editando `starship/starship.
 
 ### obsidian
 - Instala el gestor de notas Obsidian.
-- (Opcional, solo si está en la lista de dependencias).
-- Uso:
 	```bash
 	make obsidian
 	make test-obsidian
+	```
+
+### krita
+- Instala el programa de edición y pintura digital Krita.
+- Se instala automáticamente como parte de las dependencias principales.
+- Uso:
+	```bash
+	make install
+	krita
+	```
+
+### godot
+- Instala la última versión estable de Godot Engine (descarga directa del repositorio oficial).
+- El binario se instala como comando global `godot` en `/usr/local/bin` o `$HOME/.local/bin`.
+- Uso:
+	```bash
+	make install
+	godot
 	```
 
 ### code

@@ -1,3 +1,31 @@
+# Función específica para instalar Godot Engine
+install_godot() {
+  print_configuration_message "Instalando Godot Engine (última versión estable)..."
+  GODOT_URL=$(curl -s https://api.github.com/repos/godotengine/godot/releases/latest | grep browser_download_url | grep 'linux.x86_64.zip' | cut -d '"' -f4 | head -n1)
+  if [ -z "$GODOT_URL" ]; then
+    echo -e "\e[1;31mNo se pudo obtener la URL de la última versión de Godot.\e[0m"
+    return 1
+  fi
+  wget -O godot.zip "$GODOT_URL"
+  unzip -o godot.zip -d godot_bin
+  GODOT_EXE=$(find godot_bin -type f -name 'Godot*' | head -n1)
+  if [ -z "$GODOT_EXE" ]; then
+    echo -e "\e[1;31mNo se encontró el ejecutable de Godot tras la descarga.\e[0m"
+    rm -rf godot.zip godot_bin
+    return 1
+  fi
+  if command -v sudo &> /dev/null; then
+    sudo mv "$GODOT_EXE" /usr/local/bin/godot
+    sudo chmod +x /usr/local/bin/godot
+  else
+    mkdir -p "$HOME/.local/bin"
+    mv "$GODOT_EXE" "$HOME/.local/bin/godot"
+    chmod +x "$HOME/.local/bin/godot"
+    export PATH="$HOME/.local/bin:$PATH"
+  fi
+  rm -rf godot.zip godot_bin
+  echo -e "✅ \e[1;32mGodot Engine instalado y disponible como comando global 'godot'.\e[0m"
+}
 #!/bin/bash
 
 # Cargar variables desde el archivo .env si existe
@@ -35,6 +63,7 @@ DEPENDENCIES=(
   terminator
   obsidian
   code # Visual Studio Code
+  krita
 )
 
 # Lista de herramientas secundarias opcionales
@@ -189,6 +218,9 @@ install_dependencies() {
       check_and_install "$package" "$check_command" "$success_message"
     fi
   done
+
+  # Instalar Godot Engine
+  install_godot
 
   print_header "1.2 Herramientas secundarias"
   if [[ "$CI" == "true" ]]; then
