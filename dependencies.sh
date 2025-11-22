@@ -62,8 +62,9 @@ DEPENDENCIES=(
   zip
   terminator
   obsidian
-  code # Visual Studio Code
+  code 
   krita
+  samba
 )
 
 # Lista de herramientas secundarias opcionales

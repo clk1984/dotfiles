@@ -4,6 +4,7 @@
   [[default]]
     foreground_color = "#00ff00"
     scrollback_infinite = True
+    copy_on_selection = True
 [layouts]
   [[default]]
     [[[window0]]]
