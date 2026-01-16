@@ -21,6 +21,29 @@ if ! command -v mise &> /dev/null; then
 	fi
 fi
 
+
+# Detectar shell y agregar PATH al archivo de configuración si no existe
+shell_name=$(basename "$SHELL")
+case "$shell_name" in
+	bash)
+		shell_rc="$HOME/.bashrc"
+		;;
+	zsh)
+		shell_rc="$HOME/.zshrc"
+		;;
+	fish)
+		shell_rc="$HOME/.config/fish/config.fish"
+		;;
+	*)
+		shell_rc="$HOME/.profile"
+		;;
+esac
+
+if ! grep -q 'mise/shims' "$shell_rc"; then
+	echo 'export PATH="$HOME/.local/share/mise/shims:$PATH"' >> "$shell_rc"
+	echo "\n[INFO] Se añadió mise/shims al PATH en $shell_rc"
+fi
+
 # ensure config directory exists
 mkdir -p "${HOME}"/.config/mise/
 
