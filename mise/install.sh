@@ -39,16 +39,16 @@ case "$shell_name" in
 		;;
 esac
 
-if ! grep -q 'mise/shims' "$shell_rc"; then
-	echo 'export PATH="$HOME/.local/share/mise/shims:$PATH"' >> "$shell_rc"
-	echo "\n[INFO] Se añadió mise/shims al PATH en $shell_rc"
-fi
+
+echo 'export PATH="$HOME/.local/share/mise/shims:$PATH"' >> "$shell_rc"
+echo 'eval "$(mise activate bash)"' >> "$shell_rc"
+echo "\n[INFO] Se añadió mise/shims al PATH en $shell_rc"
 
 # ensure config directory exists
 mkdir -p "${HOME}"/.config/mise/
 
 # create config symlink
-ln -sfv ./mise/config.toml "${HOME}"/.config/mise/config.toml
+ln -sfv "$(cd "$(dirname "$0")/.." && pwd)/mise/config.toml" "${HOME}"/.config/mise/config.toml
 
 # update plugins
 mise plugin update
@@ -56,5 +56,5 @@ mise plugin update
 # install tools
 mise install
 
-# update tools
-mise up
+mise reshim
+mise ls --installed --quiet | awk '{print $1}' | xargs -I {} mise use -g {}

@@ -1,11 +1,11 @@
 #https://mise.jdx.dev/registry.html
 [tools]
-java = ["21"]
-node = ["22"]
-python = ["3"]
-rust = ["nightly"]
-yarn = ["4"]
-awscli = "latest"
+java = "latest"
+node = "latest"
+python = "latest"
+rust = "latest"
+yarn = "latest"
+awscli = { version = "latest", symlink_bins = "true" }
 bat = "latest"
 delta = "latest"
 fd = "latest"
@@ -16,14 +16,15 @@ go = "latest"
 jq = "latest"
 kubectl = "latest"
 neovim = "latest"
-pnpm = "9.7"
+pnpm = "latest"
 starship = "latest"
-terraform = "1.9"
-terragrunt = "0.67"
-tflint = "0.53.0"
+terraform = "latest"
+terragrunt = "latest"
+tflint = "latest"
 k9s = "latest"
 opentofu = "latest"
-kind = "0.31.0"
+kind = "latest"
+aws-vault = "latest"
 
 [tasks."terraform:init"]
 description = "Initializes a Terraform working directory"
